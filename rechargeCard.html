@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recharge Card</title>
+    <link rel="stylesheet" href="rechargeCard.css">
+</head>
+
+<body>
+    <div id="dashboard">
+        <marquee behavior="" direction="left">20% discount on every 10 purchase!!! Buy Mtn bundle and enjoy this offer.
+        </marquee>
+        <h1>Recharge Card</h1>
+        <div id="overlay">
+            <div id="alertBox">
+                <p id="alertMessage"></p>
+                <button id="closeButton" style="margin-top: 10px;">OK</button>
+            </div>
+        </div>
+            <div id="dash">
+                <div id="buy">
+                    <div>
+                        <label for="choose-network">Choose Network</label>
+                        <select name="" id="choose-network">
+                            <option value="">Select Network</option>
+                            <option value="MTN">Mtn</option>
+                            <option value="Airtel">Airtel</option>
+                            <option value="Glo">Glo</option>
+                            <option value="9mobile">9mobile</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="select-amount">Select Amount</label>
+                        <select name="" id="select-amount">
+                            <option value="">Select Amount</option>
+                            <option value="1000">1000</option>
+                            <option value="500">500</option>
+                            <option value="200">200</option>
+                            <option value="100">100</option>
+                            <option value="100">50</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="">Generate Pin</label>
+                        <input type="text" placeholder="Generate Pin" id="generate-pin" readonly>
+                    </div>
+                    <button onclick="generate()" type="submit" id="generateBtn"
+                        class="disableGenBtn enableGenBtn">Generate</button>
+                </div>
+                <div id="redeem">
+                    <label for="">Insert Pin Below</label>
+                    <input type="text" id="recharge-input" placeholder="Enter your pin here">
+                    <button onclick="recharge()" id="rechargeBtn" type="submit">Recharge Card</button>
+                </div>
+            </div>
+
+    </div>
+    <div id="table-div">
+        <table>
+            <thead>
+                <tr>
+                    <th>S/N</th>
+                    <th>Network</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Pin</th>
+                    <th>PrintRef</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>
+<script src="rechargeCard.js"></script>
