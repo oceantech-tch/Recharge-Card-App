@@ -7,7 +7,7 @@ const rechargeInput = document.getElementById("recharge-input");
 let currentDate = new Date();
 currentDate = currentDate.toLocaleString();
 
-let selectedCardDetails = [];
+let selectedCardDetails = JSON.parse(localStorage.getItem("table-body")) || [];
 
 chooseNetwork.addEventListener("change", disableButton);
 selectAmount.addEventListener("change", disableButton);
@@ -27,6 +27,12 @@ function disableButton() {
 }
 disableButton();
 
+const addToLocal = () => {
+    
+}
+
+
+// check if the array in localstorage has been modified or not. if so, we set a conditon (default desc), otherwise we refresh the tablebody and then fetch the modified array elements to display them inside tablebody.
 const generate = () => {
     const choosedNetwork = chooseNetwork.value;
     const choosedAmount = selectAmount.value;
@@ -42,15 +48,25 @@ const generate = () => {
         ref: printRef,
         status: isUsed,
     });
-    renderTableAndDeleteButton();
     chooseNetwork.value = "";
     selectAmount.value = "";
     generatePin.value = "";
     disableButton();
+    localStorage.setItem("table-body", JSON.stringify(selectedCardDetails));
+    renderTableAndDeleteButton();
+
 };
+//  check if the array in localstorage has been modified or not. if so, we set a conditon (default desc), otherwise we refresh the tablebody and then fetch the modified array elements to display them inside tablebody
 
 const renderTableAndDeleteButton = () => {
     tableBody.innerHTML = "";
+
+    selectedCardDetails = JSON.parse(localStorage.getItem("table-body")) || [];
+    if (selectedCardDetails.length === 0) {
+        tableBody.innerHTML = 'No history found'
+        return;
+    }
+
     selectedCardDetails.forEach((el, index) => {
         tableBody.innerHTML += `
             <tr>
