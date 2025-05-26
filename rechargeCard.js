@@ -164,7 +164,7 @@ const closeAlert = () => {
     overlay.style.display = 'none';
 }
 document.getElementById('closeButton').addEventListener('click', closeAlert);
-
+localStorage.clear()
 // console.log(currentDate);
 // console.log(currentDate.getFullYear());
 // console.log(currentDate.getMonth() + 1);
