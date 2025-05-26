@@ -6,7 +6,6 @@ const tableBody = document.getElementById("table-body");
 const rechargeInput = document.getElementById("recharge-input");
 let currentDate = new Date();
 currentDate = currentDate.toLocaleString();
-
 let selectedCardDetails = JSON.parse(localStorage.getItem("table-body")) || [];
 
 chooseNetwork.addEventListener("change", disableButton);
@@ -48,12 +47,12 @@ const generate = () => {
         ref: printRef,
         status: isUsed,
     });
+    renderTableAndDeleteButton();
     chooseNetwork.value = "";
     selectAmount.value = "";
     generatePin.value = "";
     disableButton();
-    localStorage.setItem("table-body", JSON.stringify(selectedCardDetails));
-    renderTableAndDeleteButton();
+    // localStorage.setItem("table-body", JSON.stringify(selectedCardDetails));
 
 };
 //  check if the array in localstorage has been modified or not. if so, we set a conditon (default desc), otherwise we refresh the tablebody and then fetch the modified array elements to display them inside tablebody
@@ -61,11 +60,11 @@ const generate = () => {
 const renderTableAndDeleteButton = () => {
     tableBody.innerHTML = "";
 
-    selectedCardDetails = JSON.parse(localStorage.getItem("table-body")) || [];
-    if (selectedCardDetails.length === 0) {
-        tableBody.innerHTML = 'No history found'
-        return;
-    }
+    // selectedCardDetails = JSON.parse(localStorage.getItem("table-body")) || [];
+    // if (selectedCardDetails.length === 0) {
+    //     tableBody.innerHTML = 'No history found'
+    //     return;
+    // }
 
     selectedCardDetails.forEach((el, index) => {
         tableBody.innerHTML += `
@@ -96,6 +95,7 @@ const renderTableAndDeleteButton = () => {
         });
     });
 }
+renderTableAndDeleteButton();
 
 const rechargeBtn = document.getElementById("rechargeBtn");
 const purchasedCardPin = selectedCardDetails;
