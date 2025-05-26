@@ -9,6 +9,18 @@
 </head>
 
 <body>
+    <!--check if the array in localstorage has been modified or not. if so, we set a conditon (default desc), otherwise we refresh the tablebody and the fetch the modified array elements and display them inside tablebody.-->
+
+    <!--
+    one functon works for adding the data to localstorage. the second fn displays. we currently have one fn and need the second one. Generate fn aka display fn one displays and no add to localstorage. we need new fn to add to localstorage. we must not nfere with the display fn aka Generate fn. but we must know when to call our add fn inside the display fn or vice versa.
+
+    1. Add to localstorage 0k
+    2. Call fn inside another to execute functionalties 0k
+    3. Display a messag for a first time user
+
+    -->
+
+
     <div id="dashboard">
         <marquee behavior="" direction="left">20% discount on every 10 purchase!!! Buy Mtn bundle and enjoy this offer.
         </marquee>
@@ -39,7 +51,7 @@
                             <option value="500">500</option>
                             <option value="200">200</option>
                             <option value="100">100</option>
-                            <option value="100">50</option>
+                            <option value="50">50</option>
                         </select>
                     </div>
                     <div>

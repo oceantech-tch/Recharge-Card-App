@@ -6,6 +6,7 @@ const tableBody = document.getElementById("table-body");
 const rechargeInput = document.getElementById("recharge-input");
 let currentDate = new Date();
 currentDate = currentDate.toLocaleString();
+
 let selectedCardDetails = JSON.parse(localStorage.getItem("table-body")) || [];
 
 chooseNetwork.addEventListener("change", disableButton);
@@ -27,11 +28,10 @@ function disableButton() {
 disableButton();
 
 const addToLocal = () => {
-    
+    localStorage.setItem("table-body", JSON.stringify(selectedCardDetails));
 }
 
 
-// check if the array in localstorage has been modified or not. if so, we set a conditon (default desc), otherwise we refresh the tablebody and then fetch the modified array elements to display them inside tablebody.
 const generate = () => {
     const choosedNetwork = chooseNetwork.value;
     const choosedAmount = selectAmount.value;
@@ -47,24 +47,23 @@ const generate = () => {
         ref: printRef,
         status: isUsed,
     });
+    
     renderTableAndDeleteButton();
     chooseNetwork.value = "";
     selectAmount.value = "";
     generatePin.value = "";
     disableButton();
-    // localStorage.setItem("table-body", JSON.stringify(selectedCardDetails));
-
+    addToLocal();
+    
 };
-//  check if the array in localstorage has been modified or not. if so, we set a conditon (default desc), otherwise we refresh the tablebody and then fetch the modified array elements to display them inside tablebody
 
 const renderTableAndDeleteButton = () => {
     tableBody.innerHTML = "";
-
-    // selectedCardDetails = JSON.parse(localStorage.getItem("table-body")) || [];
-    // if (selectedCardDetails.length === 0) {
-    //     tableBody.innerHTML = 'No history found'
-    //     return;
-    // }
+    addToLocal()
+    if (selectedCardDetails.length == 0) {
+        tableBody.textContent = "No history found"
+        return;
+    }
 
     selectedCardDetails.forEach((el, index) => {
         tableBody.innerHTML += `
@@ -94,8 +93,8 @@ const renderTableAndDeleteButton = () => {
             this.style.backgroundColor = '#e70b0b'
         });
     });
+    addToLocal();
 }
-renderTableAndDeleteButton();
 
 const rechargeBtn = document.getElementById("rechargeBtn");
 const purchasedCardPin = selectedCardDetails;
@@ -119,6 +118,7 @@ rechargeBtn.addEventListener("click", () => {
         el.ref.toString().includes(rechargeInputVal)
     );
     if (validatePin.length > 0 && validatePin.every(el => el.status === false)) {
+        document.getElementById('alertMessage').style.color = '#fff';
         showAlert('Sorry, this card has already been used!');
     } else if (validatePin.length > 0) {
         purchasedCardPin.forEach((el) => {
@@ -126,6 +126,7 @@ rechargeBtn.addEventListener("click", () => {
                 el.status = false;
             }
         });
+        document.getElementById('alertMessage').style.color = '#fff';
         showAlert('Recharge Successful!');
         tableBody.innerHTML = "";
         purchasedCardPin.forEach((el, index) => {
@@ -164,7 +165,7 @@ const closeAlert = () => {
     overlay.style.display = 'none';
 }
 document.getElementById('closeButton').addEventListener('click', closeAlert);
-localStorage.clear()
+
 // console.log(currentDate);
 // console.log(currentDate.getFullYear());
 // console.log(currentDate.getMonth() + 1);
