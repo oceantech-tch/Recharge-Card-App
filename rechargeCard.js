@@ -51,7 +51,6 @@ const generate = () => {
     renderTableAndDeleteButton();
     chooseNetwork.value = "";
     selectAmount.value = "";
-    generatePin.value = "";
     disableButton();
     addToLocal();
     
